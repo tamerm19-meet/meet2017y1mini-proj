@@ -1,3 +1,6 @@
+#this is jeremy the snek
+#------------------------
+
 import turtle
 import random
 
@@ -9,7 +12,7 @@ turtle.setup(SIZE_X, SIZE_Y)
 turtle.penup()
 
 SQUARE_SIZE = 20
-START_LENGTH= 4
+START_LENGTH= 6
 
 #lists
 pos_list=[]
@@ -51,29 +54,29 @@ DOWN=1
 LEFT=2
 RIGHT=3
 direction=UP
+UP_EDGE = 250
+DOWN_EDGE = -250
+RIGHT_EDGE = 400
+LEFT_EDGE = -400
 
 def up():
     global direction
     direction=UP
-    move_snake()
     print("You pressed the ^ KEY!")
 
 def down():
     global direction
     direction=DOWN
-    move_snake()
     print("You pressed the v KEY!")    
 
 def left():
     global direction
     direction=LEFT
-    move_snake()
     print("You pressed the <- KEY!")
 
 def right():
     global direction
     direction=RIGHT
-    move_snake()
     print("You pressed the -> KEY!")
 
 turtle.onkeypress(up,UP_ARROW)
@@ -103,12 +106,67 @@ def move_snake():
          snake.goto(x_pos, y_pos + SQUARE_SIZE)
          print("You moved UP")
 
-##################################################
+#this shows the tail after the squares move
 
-my_pos=snake.pos()
-pos_list.append(my_pos)
-new_stamp = snake.stamp()
-stamp_list.append(new_stamp)
+    my_pos=snake.pos()
+    pos_list.append(my_pos)
+    new_stamp = snake.stamp()
+    stamp_list.append(new_stamp)
+
+#this gets rid of the tail at the end
+    
+    old_stamp = stamp_list.pop(0)
+    snake.clearstamp(old_stamp)
+    pos_list.pop(0)
+
+
+    
+    
+    new_pos = snake.pos()
+    new_x_pos = new_pos[0]
+    new_y_pos = new_pos[1]
+
+    if new_x_pos >= RIGHT_EDGE:
+        print("You hit the right edge! Game over!")
+        quit()
+
+    if new_x_pos <= LEFT_EDGE:
+        print("You hit the left edge! Game over!")
+        quit()
+
+    if new_y_pos >= UP_EDGE:
+        print("You hit the upper edge! Game over!")
+        quit()
+
+    if new_y_pos <= DOWN_EDGE:
+        print("You hit the lower edge! Game over!")
+        quit()
+
+    turtle.ontimer(move_snake,TIME_STEP)
+
+move_snake()
+
+turtle.register_shape("trash.gif")
+food = turtle.clone()
+food.shape("trash.gif")
+food_pos = [(100,100), (-100,100), (-100,-100), (100,-100)]
+food_stamps = []
+
+for  this_food_pos in food_pos:
+    x = this_food_pos [0]
+    y = this_food_pos [1]
+    food.goto(x, y)
+    food_stamp=food.stamp()
+    food_stamps.append (food_stamp)
+    food_stamp.clearstamp()
+        
+    food.mainloop()
+
+
+
+
+
+
 
 
 
