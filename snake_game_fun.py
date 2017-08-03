@@ -1,3 +1,4 @@
+
 #this is jeremy the snek
 #------------------------
 
@@ -54,10 +55,24 @@ DOWN=1
 LEFT=2
 RIGHT=3
 direction=UP
+
+#edges and edge lines
+
 UP_EDGE = 360
 DOWN_EDGE = -360
 RIGHT_EDGE = 550
 LEFT_EDGE = -550
+edgy_turtle=turtle.clone()
+edgy_turtle.hideturtle()
+edgy_turtle.penup()
+edgy_turtle.goto(550, 360)
+edgy_turtle.pendown()
+edgy_turtle.pensize(15)
+edgy_turtle.goto(-550, 360)
+edgy_turtle.goto(-550, -360)
+edgy_turtle.goto(550, -360)
+edgy_turtle.goto(550, 360)
+
 
 def up():
     global direction
@@ -183,62 +198,3 @@ for this_food_pos in food_pos:
     food.goto(x, y)
     food_stamp=food.stamp()
     food_stamps.append(food_stamp)
-    
-
-    
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
