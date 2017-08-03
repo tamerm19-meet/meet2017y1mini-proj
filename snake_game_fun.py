@@ -11,7 +11,7 @@ SIZE_Y=500
 turtle.setup(SIZE_X, SIZE_Y)
 turtle.penup()
 
-SQUARE_SIZE = 20
+SQUARE_SIZE = 25
 START_LENGTH= 4
 
 #lists
@@ -54,10 +54,10 @@ DOWN=1
 LEFT=2
 RIGHT=3
 direction=UP
-UP_EDGE = 250
-DOWN_EDGE = -250
-RIGHT_EDGE = 400
-LEFT_EDGE = -400
+UP_EDGE = 360
+DOWN_EDGE = -360
+RIGHT_EDGE = 550
+LEFT_EDGE = -550
 
 def up():
     global direction
@@ -135,12 +135,12 @@ def move_snake():
         print("You have eaten the food!")
         make_food()
 #this gets rid of the tail at the end
-    
-    old_stamp = stamp_list.pop(0)
-    snake.clearstamp(old_stamp)
-    pos_list.pop(0)
+    else:
+        old_stamp = stamp_list.pop(0)
+        snake.clearstamp(old_stamp)
+        pos_list.pop(0)
 
-
+#edges
     
     
     new_pos = snake.pos()
@@ -161,6 +161,11 @@ def move_snake():
 
     if new_y_pos <= DOWN_EDGE:
         print("You hit the lower edge! Game over!")
+        quit()
+
+    #eat urself command thing
+    if pos_list[-1] in pos_list[:-1]:
+        print("You ate yourself, yum!")
         quit()
 
     turtle.ontimer(move_snake,TIME_STEP)
